@@ -16,36 +16,6 @@ use App\Http\Controllers\ContactController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/',[HomeController::class, 'index']);
-
-// Route::get('/', function () {
-
-//     $data = [
-//         'key1' => 'Home1',
-//         'key2 '=> 'Home2',
-//         'key3' => 'Home3',
-//     ];
-//     return view('home', ['data'=>$data]);
-// });
-
-// Route::get('contact', function () {
-//     $data = [
-//         'key1' => 'Conatct1',
-//         'key2 '=> 'Conatct2',
-//         'key3' => 'Conatct3',
-//     ];
-//     return view('contact',compact('data'));
-// });
-
-// Route::get('about', function () {
-
-//        $data = [
-//         'key1' => 'About1',
-//         'key2 '=> 'About2',
-//         'key3' => 'About3',
-//     ];
-//     return view('about', ['data'=>$data]);
-   
-   
-// });
+// Route::get('/',[HomeController::class, 'index']);
+Route::resource('posts',HomeController::class);
 
