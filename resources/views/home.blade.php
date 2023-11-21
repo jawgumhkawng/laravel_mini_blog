@@ -6,6 +6,7 @@
       <h2 class="text-center text-white mt-5 mb-5">Laravel App | <span class="text-danger">Home Page</span> </h2>
       <div class="mb-3">
         <a href="/posts/create" class="btn btn-info">+ New Post</a>
+        <a href="logout" class="btn btn-danger">Logout</a>
       </div>
         
      @foreach ($data as $post )

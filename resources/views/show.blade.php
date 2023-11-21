@@ -11,6 +11,7 @@
             <div class="card-body">
                 <h6 class="card-title text-info h6">{{ $post->created_at }}</h6>
                 <p class="card-text text-white">{{ $post->description }}</p>
+                <p class="card-text text-white" style="font-style:italic">Category : <span class="text-primary">{{ $post->categories->name }}</span></p>
             </div>
         </div><br>
          <div class="mb-2">

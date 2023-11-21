@@ -24,6 +24,7 @@ class storePostRequest extends FormRequest
         return [
             'name' => 'bail|required|max:255',
             'description' => 'required|max:255',
+            'category_id' => 'required',
         ];
     }
 

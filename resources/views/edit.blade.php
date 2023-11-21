@@ -26,6 +26,19 @@
             <label for="exampleInputPassword1" class="form-label text-white" style="font-weight:bolder">Description</label>
             <textarea type="text" class="form-control bg-dark text-white {{ ($errors->first('description') ? " form-error" : "") }}" id=""  name=description  required>{{ old('description',$post->description) }}</textarea>        
         </div>
+        <div class="mb-3">
+           @error('category_id')
+              <div class="alert alert-warning">{{ $message }}</div>
+          @enderror
+            <select name="category_id" id="" class="form-control bg-dark text-white">
+              <option value="">Select Category</option>
+              @foreach ($categories as $cat)
+
+              <option value="{{ $cat->id }}" {{ $cat->id == $post->category_id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                
+              @endforeach
+            </select>
+        </div>
          <a href="/posts" class="btn btn-info px-3">Back</a>
         <button type="submit" class="btn btn-primary">Submit</button>
      </form>
