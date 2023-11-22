@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use view;
+use auth;
 
+use view;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+
 use App\Http\Requests\storePostRequest;
 
 class HomeController extends Controller
@@ -43,9 +45,9 @@ class HomeController extends Controller
     {
         
         $validated = $request->validated(); 
-        Post::create($validated);
+        Post::create($validated + ['user_id'=>auth()->id()]);
 
-       return redirect('/posts');
+       return redirect('/posts')->with('create', 'Post create successfully!');
 
     }
 
@@ -114,7 +116,7 @@ class HomeController extends Controller
 
          $post->update($validated);
 
-         return redirect('/posts');
+         return redirect('/posts')->with('edit', 'Post updated successfully!');
     }
     /**
      * Remove the specified resource from storage.
@@ -130,6 +132,6 @@ class HomeController extends Controller
      public function destroy(Post $post)
     {
        $post->delete();
-       return redirect('/posts');
+       return redirect('/posts')->with('delete', 'Post Deleted!');
     }
 }

@@ -10,6 +10,33 @@
         <h2 class="text-white float-end">{{ Auth::user()->name }}</h2>
       </div>
         
+      @if (session('create'))
+
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>Success!</strong>{{ session('create') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" style="border:0px;active:border:0px;" aria-label="Close"></button>
+      </div>
+
+     @endif
+
+      @if (session('edit'))
+
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong>{{ session('edit') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" style="border:0px;active:border:0px;" aria-label="Close"></button>
+      </div>
+
+     @endif
+
+     @if (session('delete'))
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Success!</strong>{{ session('delete') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+     @endif
+
      @foreach ($data as $post )
           
      

@@ -40,8 +40,9 @@
               @endforeach
             </select>
         </div>
-         <a href="/posts" class="btn btn-info px-3">Back</a>
+         
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/posts" class="btn btn-info px-3">Back</a>
      </form>
     </div>
   </div>
