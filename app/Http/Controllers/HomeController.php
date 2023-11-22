@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index()
     {
         // $data = Post::all();
-        $data = Post::orderBy('id','desc')->get();
+        $data = Post::where('user_id',auth()->id())->orderBy('id','desc')->get();
         return view('home', compact('data'));
 
     
@@ -41,8 +41,8 @@ class HomeController extends Controller
      */
     public function store(storePostRequest $request)
     {
-
-        $validated = $request->validated();
+        
+        $validated = $request->validated(); 
         Post::create($validated);
 
        return redirect('/posts');
@@ -56,7 +56,10 @@ class HomeController extends Controller
      */
     public function show(Post $post)
     {
-
+         $this->authorize('view',$post);
+        // if($post->user_id != auth()->id()){
+        //     abort(403);
+        // }
         return view ('show', compact('post'));
     }
 
@@ -73,7 +76,12 @@ class HomeController extends Controller
 
     //route model binding
       public function edit(Post $post)
-    {
+    {   
+
+        $this->authorize('view',$post);
+        //   if($post->user_id != auth()->id()){
+        //     abort(403);
+        // }
          $categories = Category::all();
          return view ('edit', compact('post','categories'));
     }

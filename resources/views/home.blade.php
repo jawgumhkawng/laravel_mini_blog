@@ -7,6 +7,7 @@
       <div class="mb-3">
         <a href="/posts/create" class="btn btn-info">+ New Post</a>
         <a href="logout" class="btn btn-danger">Logout</a>
+        <h2 class="text-white float-end">{{ Auth::user()->name }}</h2>
       </div>
         
      @foreach ($data as $post )

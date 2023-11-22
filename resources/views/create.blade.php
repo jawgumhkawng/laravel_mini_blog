@@ -8,13 +8,15 @@
     <div class="card bg-dark shadow p-4" style="border:1px solid rgb(63, 53, 53)">
       <form action="/posts" method="post" class="bg-dark">
         @csrf
+        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+        
        
         <div class="mb-3">
           @error('name')
               <div class="alert alert-warning">{{ $message }}</div>
           @enderror
             <label for="exampleInputEmail1" class="form-label text-white" style="font-weight:bolder">Name</label>
-            <input type="text" class="form-control bg-dark text-white {{ ($errors->first('name') ? " form-error" : "") }}" name=name  value="{{ old('name') }}" required>
+            <input type="text" class="form-control bg-dark text-white {{ ($errors->first('name') ? " form-error" : "") }}" name="name"  value="{{ old('name') }}" required>
         
         </div>
         <div class="mb-3">
@@ -22,7 +24,7 @@
               <div class="alert alert-warning">{{ $message }}</div>
           @enderror
             <label for="exampleInputPassword1" class="form-label text-white" style="font-weight:bolder">Description</label>
-            <textarea type="text" class="form-control bg-dark text-white {{ ($errors->first('description') ? " form-error" : "") }}" id=""  name=description required >{{ old('description') }}</textarea>        
+            <textarea type="text" class="form-control bg-dark text-white {{ ($errors->first('description') ? " form-error" : "") }}" id=""  name="description" required >{{ old('description') }}</textarea>        
         </div>
 
         <div class="mb-3">

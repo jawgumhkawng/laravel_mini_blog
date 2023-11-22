@@ -24,7 +24,7 @@ Route::resource('posts',HomeController::class)->middleware([
     'verified',
 ]);
 
-Route::get('logout',[AuthController::class, 'logout']);
+Route::get('/logout',[AuthController::class, 'logout']);
 
 // Route::middleware([
 //     'auth:sanctum',
