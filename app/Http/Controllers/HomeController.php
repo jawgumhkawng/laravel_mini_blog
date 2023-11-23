@@ -10,6 +10,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\storePostRequest;
+use App\Mail\PostStore;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -18,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $data = Post::all();
+         // $data = Post::all();
         $data = Post::where('user_id',auth()->id())->orderBy('id','desc')->get();
         return view('home', compact('data'));
 
@@ -46,7 +48,6 @@ class HomeController extends Controller
         
         $validated = $request->validated(); 
         Post::create($validated + ['user_id'=>auth()->id()]);
-
        return redirect('/posts')->with('create', 'Post create successfully!');
 
     }

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Mail\PostStore;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -16,5 +18,15 @@ class Post extends Model
        public function categories()
     {
         return $this->belongsTo('App\Models\Category', 'category_id');
+    }
+
+    public static function booted()
+    {
+     static::created(function($post)
+        {
+               Mail::to('jaw@ gmail.com')->send(new PostStore($post));
+        });
+
+    
     }
 }
