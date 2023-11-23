@@ -25,8 +25,8 @@ class HomeController extends Controller
     public function index()
     {
          // $data = Post::all();
-         $user = User::find(1);
-         $user->notify(new PostCreateNotification());
+        //  $user = User::find(1);
+        //  $user->notify(new PostCreateNotification());
         //  Notification::send(User::find(1), new PostCreateNotification());
         $data = Post::where('user_id',auth()->id())->orderBy('id','desc')->get();
         return view('home', compact('data'));
@@ -54,7 +54,7 @@ class HomeController extends Controller
     {
         
         $validated = $request->validated(); 
-       $post = Post::create($validated + ['user_id'=>auth()->id()]);
+        $post = Post::create($validated + ['user_id'=>auth()->id()]);
         event(new PostCreateEvent($post));
        return redirect('/posts')->with('create', 'Post create successfully!');
 
