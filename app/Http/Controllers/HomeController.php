@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreateEvent;
 use auth;
 
 use view;
 use App\Models\Post;
+use App\Models\User;
+use App\Mail\PostStore;
+
 use App\Models\Category;
 use Illuminate\Http\Request;
-
-use App\Http\Requests\storePostRequest;
-use App\Mail\PostStore;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\storePostRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PostCreateNotification;
 
 class HomeController extends Controller
 {
@@ -21,6 +25,9 @@ class HomeController extends Controller
     public function index()
     {
          // $data = Post::all();
+         $user = User::find(1);
+         $user->notify(new PostCreateNotification());
+        //  Notification::send(User::find(1), new PostCreateNotification());
         $data = Post::where('user_id',auth()->id())->orderBy('id','desc')->get();
         return view('home', compact('data'));
 
@@ -47,7 +54,8 @@ class HomeController extends Controller
     {
         
         $validated = $request->validated(); 
-        Post::create($validated + ['user_id'=>auth()->id()]);
+       $post = Post::create($validated + ['user_id'=>auth()->id()]);
+        event(new PostCreateEvent($post));
        return redirect('/posts')->with('create', 'Post create successfully!');
 
     }
